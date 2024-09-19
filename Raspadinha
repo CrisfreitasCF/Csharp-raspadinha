@@ -1,0 +1,169 @@
+class IfThenElse
+{
+    static void Main(string[] args)
+    {
+
+        //Este é o jogo da raspadinha em que o utilizador inicia com um valor de 2€ e joga até ficar sem saldo, pode ganhar se escolher 2 simbolos iguais por exemplo, ou um simbolo e 1 numero
+        //O prémio máximo no caso de escolher os simbolos e numero corretamente é de 50.000€
+
+        Console.WriteLine("\t\t\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        Console.WriteLine("\t\t\t\tx                                                                               x");
+        Console.WriteLine("\t\t\t\tx                               xxxxxx  RASPADINHA  xxxxxx                      x");
+        Console.WriteLine("\t\t\t\tx                                                                               x");
+        Console.WriteLine("\t\t\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+
+        // lista de variaveis
+
+        int saldo = 5;
+        char[] simbolos = { '*', '#', '@', '$' };
+
+
+        //premio
+        int jackpot = 50000;
+        int premio2 = 1;
+        int premio3 = 2;
+
+        //simbolos corretos
+        char simbolocorreto1;
+        char simbolocorreto2;
+        int numerocorreto;
+
+        //escolha do jogador
+        char simboloescolha1;
+        char simboloescolha2;
+        int numeroescolha;
+
+
+        //RANDOM
+        Random rand = new Random();
+        simbolocorreto1 = simbolos[rand.Next(3)];
+        simbolocorreto2 = simbolos[rand.Next(3)];
+        numerocorreto = rand.Next(1, 5);
+
+        //simbolos
+        //Console.WriteLine(simbolocorreto1);
+        //Console.WriteLine(simbolocorreto2);
+        //Console.WriteLine(numerocorreto);
+
+        bool continuar = false;
+
+
+        while (saldo > 0 && continuar == false)
+
+        {
+
+
+            Console.WriteLine("\n"+"\t\t\t\t\t       ***** Caro jogador o seu saldo é de  " + saldo + " euros" + " *****\n ");
+            Console.WriteLine("\t\t\t\t\t        *****       Deseja continuar a jogar?      *****\n ");
+            string resposta = Console.ReadLine();
+            if (resposta == "nao")
+            {
+
+
+                Console.WriteLine("\t\t\t\t -------------------------------------------------------------------------------");
+                Console.WriteLine("\t\t\t\t|                          Não joga, mas também não ganha! ;)                   |");
+                Console.WriteLine("\t\t\t\t|                     Obrigado por jogar connosco, volte sempre!                |");
+                Console.WriteLine("\t\t\t\t -------------------------------------------------------------------------------\n");
+
+                Console.ReadLine();
+                break;
+            }
+            else
+            {
+
+                Console.WriteLine("\t\t\t\t\t\t*****----------------------------------------****");
+                Console.WriteLine("\t\t\t\t\t\t*****                                        ****");
+                Console.WriteLine("\t\t\t\t\t\t*****  Mais uma voltinha, mais uma moedinha! ****");
+                Console.WriteLine("\t\t\t\t\t\t*****                                        ****");
+                Console.WriteLine("\t\t\t\t\t\t*****----------------------------------------****\n");
+
+                saldo--;
+                Console.WriteLine("\t\t\t\t\t     Escolha um simbolo entre os seguintes *, #, @, $   ");
+                simboloescolha1 = Convert.ToChar(Console.ReadLine());
+
+                Console.WriteLine("\t\t\t\t\t\t  ________________________________________\n");
+
+                Console.WriteLine("\t\t\t\t\t     Escolha um simbolo entre os seguintes *, #, @, $ ");
+                simboloescolha2 = Convert.ToChar(Console.ReadLine());
+
+                Console.WriteLine("\t\t\t\t\t\t  ________________________________________\n");
+
+                Console.WriteLine("\t\t\t\t\t\t       Escolha um numero entre 1 e 5 ");
+                numeroescolha = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("\t\t\t\t\t\t  ________________________________________\n");
+
+
+
+
+
+                if (simbolocorreto1 == simboloescolha1 && simbolocorreto2 == simboloescolha2 && numerocorreto == numeroescolha)
+                {
+
+
+                    Console.WriteLine("\t\t\t\t\t      ********************************************************");
+                    Console.WriteLine("\t\t\t\t\t      **  Acabou de ganhar o nosso Jackpot de " + jackpot + " euros!! **");
+                    Console.WriteLine("\t\t\t\t\t      *********************** PARABENS ***********************\n");
+                    
+                    saldo += jackpot;
+                }
+
+                if (simbolocorreto1 == simboloescolha1 && simbolocorreto2 != simboloescolha2 && numerocorreto != numeroescolha) //0
+                {
+                    Console.WriteLine("\t\t\t\t\t\tAcertou apenas um simbolo, não ganhou nada");
+
+                }
+
+                if (simbolocorreto1 != simboloescolha1 && simbolocorreto2 == simboloescolha2 && numerocorreto != numeroescolha)
+                {
+                    Console.WriteLine("\t\t\t\t\t\tAcertou apenas um simbolo, não ganhou nada"); //0
+
+                }
+                if (simbolocorreto1 == simboloescolha1 && simbolocorreto2 != simboloescolha2 && numerocorreto == numeroescolha)
+                {
+                    Console.WriteLine("\t\t\t\t\t\tAcertou um simbolo e o numero, ganhou " + premio2 + " euros"); //2 
+                    saldo += premio2;
+                }
+
+                if (simbolocorreto1 != simboloescolha1 && simbolocorreto2 == simboloescolha2 && numerocorreto == numeroescolha)
+                {
+                    Console.WriteLine("\t\t\t\t\t\tAcertou um simbolo e o numero, ganhou " + premio2 + " euros");//2
+                    saldo += premio2;
+                }
+                if (simbolocorreto2 == simboloescolha2 && simbolocorreto2 == simboloescolha2 && numerocorreto != numeroescolha)
+                {
+                    Console.WriteLine("\t\t\t\t\t\tAcertou dois simbolos, ganhou " + premio3 + " euros");//5
+                    saldo += premio3;
+                }
+
+
+                { // Limpa a tela do console ao final de cada ciclo
+                    Console.Clear();
+                }
+
+                if (saldo == 0)
+
+
+                {
+
+                    Console.WriteLine("\t\t\t\t\t\t*********************************************************");
+                    Console.WriteLine("\t\t\t\t\t\t*****        OHHHH ficou sem saldo! :( :( :(         ****");
+                    Console.WriteLine("\t\t\t\t\t\t*********************************************************\n");
+
+                    Console.WriteLine("\t\t\t\t\t\t*****------------------------------------------------****");
+                    Console.WriteLine("\t\t\t\t\t\t*****                                                ****");
+                    Console.WriteLine("\t\t\t\t\t\t*****   A chave correta para os 50.000 euros  era    ****");
+                    Console.WriteLine("\t\t\t\t\t\t*****\t\t\t " + simbolocorreto1 + " " + simbolocorreto2 + " " + numerocorreto + "                       ****");
+                    Console.WriteLine("\t\t\t\t\t\t*****------------------------------------------------****\n");
+
+                   
+                }
+
+
+            }
+        }
+
+    }
+}
+
+    
